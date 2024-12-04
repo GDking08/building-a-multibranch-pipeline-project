@@ -1,10 +1,16 @@
 pipeline {
-    agent any
-    stages {
-        stage('Build') {
+    agent any{
+        CI = 'true'
+    }
+    stages{
+        stage('build'){
             steps {
-                echo 'Hello world!'
+                bat 'npm install'
             }
+        }
+        stage('test'){
+            //ensure script is executable and then runh it
+            bat '"c:\\Program Files\\Git\\bin\\bash.exe" -c "chmod +x ./jenkins/scripts/test.sh && ./jenkins/scripts/test.sh"'
         }
     }
 }
