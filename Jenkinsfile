@@ -1,16 +1,20 @@
 pipeline {
-    agent any{
-        CI = 'true'
+    agent any
+    environment {
+        CI = 'true' // Setting an environment variable
     }
-    stages{
-        stage('build'){
+    stages {
+        stage('Build') {
             steps {
+                // Run npm install using a batch command
                 bat 'npm install'
             }
         }
-        stage('test'){
-            //ensure script is executable and then runh it
-            bat '"C:\\Program Files\\Git\\bin\\bash.exe" -c "chmod +x ./jenkins/scripts/test.sh && ./jenkins/scripts/test.sh"'
+        stage('Test') {
+            steps {
+                // Ensure the script is executable and run it using Git Bash
+                bat '"C:\\Program Files\\Git\\bin\\bash.exe" -c "chmod +x ./jenkins/scripts/test.sh && ./jenkins/scripts/test.sh"'
+            }
         }
     }
 }
